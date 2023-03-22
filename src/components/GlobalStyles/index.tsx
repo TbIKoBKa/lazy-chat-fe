@@ -18,7 +18,7 @@ export const GlobalStyles: FC = () => {
 
         body: {
           minHeight: '100vh',
-          backgroundColor: theme.colors.teal[0],
+          background: `linear-gradient(${theme.colors.teal[1]}, ${theme.colors.teal[0]})`,
         },
 
         '#__next': {

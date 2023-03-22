@@ -11,6 +11,7 @@ const initialState: types.IMessagesState = {
   isLoading: false,
   messages: null,
   socket: null,
+  clientsCount: 0,
 };
 
 export const messagesSlice = createSlice<types.IMessagesState, typeof reducers>(

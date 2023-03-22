@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
 import { Flex, Text } from '@mantine/core';
 
 import { Loader } from '../Loader';
@@ -10,6 +10,7 @@ interface ILoaderOverlayProps extends PropsWithChildren {
     showNoResultsMessage?: boolean;
     centerErrorMessage?: boolean;
   };
+  scrollDownOnMounted?: boolean;
 }
 
 export const LoaderOverlay: FC<ILoaderOverlayProps> = ({
@@ -20,8 +21,25 @@ export const LoaderOverlay: FC<ILoaderOverlayProps> = ({
   const { centerErrorMessage, noResultsText, showNoResultsMessage } =
     errorMessageProps;
 
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    listRef.current?.addEventListener(
+      'DOMNodeInserted',
+      () => {
+        window.scroll({
+          top: document.body.scrollHeight,
+        });
+      },
+      {
+        once: true,
+      }
+    );
+  }, []);
+
   return (
     <Flex
+      ref={listRef}
       direction='column'
       justify={
         isLoading || (centerErrorMessage && showNoResultsMessage)

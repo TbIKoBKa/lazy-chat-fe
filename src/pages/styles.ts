@@ -2,7 +2,7 @@ import { MantineTheme } from '@mantine/core';
 
 export const styles = {
   container: {
-    padding: '16px',
+    flex: 1,
     flexDirection: 'column' as const,
   },
   wrapper: {
@@ -16,15 +16,12 @@ export const styles = {
     flexDirection: 'column' as const,
     gap: 10,
     flex: 1,
+    width: '100%',
   },
-  message: (theme: MantineTheme) => ({
-    minWidth: 200,
-    maxWidth: 400,
-    borderRadius: '10px 20px 20px 20px',
-    padding: '10px 20px',
-    color: theme.white,
-    backgroundColor: theme.colors.teal[1],
-    boxShadow: `0px 0px 20px #00000055`,
+  message: (isAuthor: boolean) => ({
+    display: 'flex',
+    justifyContent: isAuthor ? 'right' : 'left',
+    width: '100%',
   }),
   submitButton: (theme: MantineTheme) => {
     return {
@@ -35,5 +32,10 @@ export const styles = {
         pointerEvents: 'all' as const,
       },
     };
+  },
+  editWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
   },
 };
